@@ -82,14 +82,22 @@
         function calculate() {
             const modal = parseFloat(document.getElementById('modal').value);
             const riskPercent = parseFloat(document.getElementById('risk').value);
+            const order = document.getElementById('order').value;
             const entry = parseFloat(document.getElementById('entry').value);
             const takeProfit = parseFloat(document.getElementById('takeProfit').value);
             const stopLose = parseFloat(document.getElementById('stopLose').value);
 
-            const tpPips = Math.abs(takeProfit - entry) * 10; // TP dalam pips
-            const slPips = Math.abs(entry - stopLose) * 10; // SL dalam pips
-            const riskReward = tpPips / slPips;
+            let tpPips, slPips;
 
+            if (order === 'buy') {
+                tpPips = Math.abs(takeProfit - entry) * 10; // TP dalam pips
+                slPips = Math.abs(entry - stopLose) * 10; // SL dalam pips
+            } else if (order === 'sell') {
+                tpPips = Math.abs(entry - takeProfit) * 10; // TP dalam pips
+                slPips = Math.abs(stopLose - entry) * 10; // SL dalam pips
+            }
+
+            const riskReward = tpPips / slPips;
             const riskAmount = modal * (riskPercent / 100); // Risiko dalam dolar
             const lot = riskAmount / slPips / 10; // Lot size
 
