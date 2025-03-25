@@ -1,121 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator Lot 8manhere</title>
+    <title>Remot All Projek</title>
     <style>
         body {
+            background-color: #121212;
+            color: #ffffff;
             font-family: Arial, sans-serif;
-            margin: 20px;
+            text-align: center;
+            padding: 20px;
         }
         .container {
-            max-width: 500px;
+            max-width: 600px;
             margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #1e1e1e;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
-        label {
-            display: block;
-            margin-bottom: 5px;
+        h1 {
+            color: #f1c40f;
         }
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #007bff;
+        .link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #3498db;
             color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
+            text-decoration: none;
             border-radius: 5px;
-            background-color: #f9f9f9;
+            transition: background 0.3s;
+        }
+        .link:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Kalkulator Lot 8manhere</h1>
-
-        <label for="modal">Modal ($):</label>
-        <input type="number" id="modal" value="10000" min="1">
-
-        <label for="risk">Risk (%):</label>
-        <input type="number" id="risk" value="2" min="0" step="0.1">
-
-        <label for="market">Market:</label>
-        <select id="market">
-            <option value="xauusd">XAUUSD</option>
-            <option value="gbpjpy">GBPJPY</option>
-            <option value="eurjpy">EURJPY</option>
-        </select>
-
-        <label for="order">Order:</label>
-        <select id="order">
-            <option value="buy">Buy</option>
-            <option value="sell">Sell</option>
-        </select>
-
-        <label for="entry">Entry Price:</label>
-        <input type="number" id="entry" value="2010" min="0" step="0.01">
-
-        <label for="takeProfit">Take Profit:</label>
-        <input type="number" id="takeProfit" value="2020" min="0" step="0.01">
-
-        <label for="stopLose">Stop Lose:</label>
-        <input type="number" id="stopLose" value="2005" min="0" step="0.01">
-
-        <button onclick="calculate()">Hitung</button>
-
-        <div id="result" class="result" style="display: none;"></div>
+        <h1>Remot All Projek</h1>
+        <a class="link" href="https://8manhere.github.io/remote_se/" target="_blank">Remote Sarjana</a>
     </div>
-
-    <script>
-        function calculate() {
-            const modal = parseFloat(document.getElementById('modal').value);
-            const riskPercent = parseFloat(document.getElementById('risk').value);
-            const order = document.getElementById('order').value;
-            const entry = parseFloat(document.getElementById('entry').value);
-            const takeProfit = parseFloat(document.getElementById('takeProfit').value);
-            const stopLose = parseFloat(document.getElementById('stopLose').value);
-
-            let tpPips, slPips;
-
-            if (order === 'buy') {
-                tpPips = Math.abs(takeProfit - entry) * 10; // TP dalam pips
-                slPips = Math.abs(entry - stopLose) * 10; // SL dalam pips
-            } else if (order === 'sell') {
-                tpPips = Math.abs(entry - takeProfit) * 10; // TP dalam pips
-                slPips = Math.abs(stopLose - entry) * 10; // SL dalam pips
-            }
-
-            const riskReward = tpPips / slPips;
-            const riskAmount = modal * (riskPercent / 100); // Risiko dalam dolar
-            const lot = riskAmount / slPips / 10; // Lot size
-
-            const profit = tpPips * lot * 10; // Profit dalam dolar
-            const loss = slPips * lot * 10; // Loss dalam dolar
-
-            const resultDiv = document.getElementById('result');
-            resultDiv.style.display = 'block';
-            resultDiv.innerHTML = `
-                <p><strong>Hasil Perhitungan:</strong></p>
-                <p>TP: ${tpPips} pips</p>
-                <p>SL: ${slPips} pips</p>
-                <p>Risk Reward: 1:${riskReward.toFixed(2)}</p>
-                <p>Lot: ${lot.toFixed(2)}</p>
-                <p>Profit: $${profit.toFixed(2)}</p>
-                <p>Loss: $${loss.toFixed(2)}</p>
-            `;
-        }
-    </script>
 </body>
 </html>
